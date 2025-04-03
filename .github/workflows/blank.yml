@@ -32,7 +32,9 @@ jobs:
           docker save -o ubuntu.tar ubuntu
           echo "docker load -i xxx.tar"
       - name: 打包
-        run: 7z a -mx=9 /mnt/mirror.7z ./
+        run: |
+          sudo chmod 777 /mnt
+          7z a -mx=9 /mnt/mirror.7z ./
       - name: 上传 # 上传构建产物，这里我们的源码目录是 src，而实际运行的代码是构建后的 bin 目录
         uses: actions/upload-artifact@v4.6.0
         with:
